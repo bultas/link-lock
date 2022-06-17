@@ -3,8 +3,6 @@
  * December 2020
  */
 
-
-
 /*******************************************************************************
  * Helper Functions
  ******************************************************************************/
@@ -17,8 +15,6 @@ function error(text) {
   alertText.innerHTML = text;
   alertText.style.opacity = 1;
 }
-
-
 
 /*******************************************************************************
  * Main UI Functions
@@ -40,7 +36,7 @@ async function onHide() {
   try {
     hiddenUrl = new URL(urlText);
   } catch {
-    error("Hidden URL is not valid. Make sure it includes \"https://\" too!");
+    error('Hidden URL is not valid. Make sure it includes "https://" too!');
     return;
   }
 
@@ -50,7 +46,7 @@ async function onHide() {
   try {
     bookmarkUrl = new URL(urlText);
   } catch {
-    error("Bookmark URL is not valid. Make sure it includes \"https://\" too!");
+    error('Bookmark URL is not valid. Make sure it includes "https://" too!');
     return;
   }
 
@@ -59,7 +55,9 @@ async function onHide() {
   try {
     let _ = JSON.parse(b64.decode(hash));
   } catch {
-    error("The hidden URL appears corrupted. It must be a password-protected Link Lock URL. <a href=\"https://jstrieb.github.io/link-lock\">Click here to add a password.</a>");
+    error(
+      'The hidden URL appears corrupted. It must be a password-protected Link Lock URL. <a href="https://bultas.github.io/link-lock">Click here to add a password.</a>'
+    );
     return;
 
     // Uncomment this to allow hiding arbitrary pages. Not secure though, so I
@@ -96,7 +94,6 @@ async function onHide() {
   });
 }
 
-
 /***
  * Called when the "change location" button is clicked. Adjusts the destination
  * of the decrypt bookmark via regular expressions.
@@ -112,33 +109,36 @@ function onChangeDecrypt() {
   }
 
   const decryptBookmark = document.querySelector("#decrypt-bookmark");
-  decryptBookmark.href = decryptBookmark.href.replace(/replace\("[^"]*"\)/, `replace("${newUrl}")`);
+  decryptBookmark.href = decryptBookmark.href.replace(
+    /replace\("[^"]*"\)/,
+    `replace("${newUrl}")`
+  );
   console.log(decryptBookmark.href);
 }
-
 
 /***
  * Get a random link from Wikipedia
  */
 async function randomLink() {
-	let page = await fetch("https://en.wikipedia.org/w/api.php?"
-			+ "format=json"
-			+ "&action=query"
-			+ "&generator=random"
-			+ "&grnnamespace=0" /* Only show articles, not users */
-			+ "&prop=info"
-			+ "&inprop=url" /* Get URLs, they're not there by default */
-			+ "&origin=*") /* https://mediawiki.org/wiki/API:Cross-site_requests */
-		.then(r => r.json())
-		.then(d => {
-			let pages = d.query.pages;
-			return pages[Object.keys(pages)[0]];
-		});
+  let page = await fetch(
+    "https://en.wikipedia.org/w/api.php?" +
+      "format=json" +
+      "&action=query" +
+      "&generator=random" +
+      "&grnnamespace=0" /* Only show articles, not users */ +
+      "&prop=info" +
+      "&inprop=url" /* Get URLs, they're not there by default */ +
+      "&origin=*"
+  ) /* https://mediawiki.org/wiki/API:Cross-site_requests */
+    .then((r) => r.json())
+    .then((d) => {
+      let pages = d.query.pages;
+      return pages[Object.keys(pages)[0]];
+    });
 
   document.querySelector("#bookmark-url").value = await page.canonicalurl;
   document.querySelector("#bookmark-title").value = await page.title;
 }
-
 
 /***
  * If the page has a hash, autofill it.
@@ -147,8 +147,9 @@ async function randomLink() {
  */
 function main() {
   if (window.location.hash) {
-    document.querySelector("#encrypted-url").value =
-      `https://jstrieb.github.io/link-lock/${window.location.hash}`;
+    document.querySelector(
+      "#encrypted-url"
+    ).value = `https://bultas.github.io/link-lock/${window.location.hash}`;
 
     window.location.hash = "";
   }

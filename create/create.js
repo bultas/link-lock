@@ -3,8 +3,6 @@
  * May 2020
  */
 
-
-
 /*******************************************************************************
  * Helper Functions
  ******************************************************************************/
@@ -13,11 +11,10 @@
 function highlight(id) {
   let output = document.querySelector("#" + id);
   output.focus();
-  output.select()
+  output.select();
   output.setSelectionRange(0, output.value.length + 1);
   return output;
 }
-
 
 // Validate all inputs, and display an error if necessary
 function validateInputs() {
@@ -38,27 +35,36 @@ function validateInputs() {
     urlObj = new URL(url.value);
   } catch {
     if (!("reportValidity" in url)) {
-      alert("URL invalid. Make sure to include 'http://' or 'https://' at the "
-          + "beginning.");
+      alert(
+        "URL invalid. Make sure to include 'http://' or 'https://' at the " +
+          "beginning."
+      );
     }
     return false;
   }
 
   // Check for non-HTTP protocols; blocks them to prevent XSS attacks. Also
   // allow magnet links for password-protected torrents.
-  if (!(urlObj.protocol == "http:"
-        || urlObj.protocol == "https:"
-        || urlObj.protocol == "magnet:")) {
-    url.setCustomValidity("The link uses a non-hypertext protocol, which is "
-        + "not allowed. The URL begins with " + urlObj.protocol + " and may be "
-        + "malicious.");
+  if (
+    !(
+      urlObj.protocol == "http:" ||
+      urlObj.protocol == "https:" ||
+      urlObj.protocol == "magnet:"
+    )
+  ) {
+    url.setCustomValidity(
+      "The link uses a non-hypertext protocol, which is " +
+        "not allowed. The URL begins with " +
+        urlObj.protocol +
+        " and may be " +
+        "malicious."
+    );
     url.reportValidity();
     return false;
   }
 
   return true;
 }
-
 
 // Perform encryption based on parameters, and return a base64-encoded JSON
 // object containing all of the relevant data for use in the URL fragment.
@@ -70,8 +76,8 @@ async function generateFragment(url, passwd, hint, useRandomSalt, useRandomIv) {
   const encrypted = await api.encrypt(url, passwd, salt, iv);
   const output = {
     v: LATEST_API_VERSION,
-    e: b64.binaryToBase64(new Uint8Array(encrypted))
-  }
+    e: b64.binaryToBase64(new Uint8Array(encrypted)),
+  };
 
   // Add the hint if there is one
   if (hint != "") {
@@ -90,8 +96,6 @@ async function generateFragment(url, passwd, hint, useRandomSalt, useRandomIv) {
   return b64.encode(JSON.stringify(output));
 }
 
-
-
 /*******************************************************************************
  * Main UI Functions
  ******************************************************************************/
@@ -104,7 +108,7 @@ async function onEncrypt() {
 
   // Check that password is successfully confirmed
   const password = document.querySelector("#password").value;
-  const confirmPassword = document.querySelector("#confirm-password")
+  const confirmPassword = document.querySelector("#confirm-password");
   const confirmation = confirmPassword.value;
   if (password != confirmation) {
     confirmPassword.setCustomValidity("Passwords do not match");
@@ -117,17 +121,24 @@ async function onEncrypt() {
   const useRandomIv = document.querySelector("#iv").checked;
   const useRandomSalt = document.querySelector("#salt").checked;
 
-  const hint = document.querySelector("#hint").value
+  const hint = document.querySelector("#hint").value;
 
-  const encrypted = await generateFragment(url, password, hint, useRandomSalt,
-      useRandomIv);
-  const output = `https://jstrieb.github.io/link-lock/#${encrypted}`;
+  const encrypted = await generateFragment(
+    url,
+    password,
+    hint,
+    useRandomSalt,
+    useRandomIv
+  );
+  const output = `https://bultas.github.io/link-lock/#${encrypted}`;
 
   document.querySelector("#output").value = output;
   highlight("output");
 
   // Adjust "Hidden Bookmark" link
-  document.querySelector("#bookmark").href = `https://jstrieb.github.io/link-lock/hidden/#${encrypted}`;
+  document.querySelector(
+    "#bookmark"
+  ).href = `https://bultas.github.io/link-lock/hidden/#${encrypted}`;
 
   // Adjust "Open in New Tab" link
   document.querySelector("#open").href = output;
@@ -142,7 +153,6 @@ async function onEncrypt() {
   });
 }
 
-
 // Activated when the "Copy" button is pressed
 function onCopy(id) {
   // Select and copy
@@ -153,23 +163,26 @@ function onCopy(id) {
   const alertArea = document.querySelector(".alert");
   alertArea.innerText = `Copied ${output.value.length} characters`;
   alertArea.style.opacity = "1";
-  setTimeout(() => { alertArea.style.opacity = 0; }, 3000);
+  setTimeout(() => {
+    alertArea.style.opacity = 0;
+  }, 3000);
 
   // Deselect
   output.selectionEnd = output.selectionStart;
   output.blur();
 }
 
-
 // Activated when a user tries to disable randomization of the IV -- adds a
 // scary warning that will frighten off anyone with common sense, unless they
 // desperately need the URL to be a few characters shorter.
 function onIvCheck(checkbox) {
   if (!checkbox.checked) {
-    checkbox.checked = !confirm("Please only disable initialization vector "
-        + "randomization if you know what you are doing. Disabling this is "
-        + "detrimental to the security of your encrypted link, and it only "
-        + "saves 20-25 characters in the URL length.\n\nPress \"Cancel\" unless "
-        + "you are very sure you know what you are doing.");
+    checkbox.checked = !confirm(
+      "Please only disable initialization vector " +
+        "randomization if you know what you are doing. Disabling this is " +
+        "detrimental to the security of your encrypted link, and it only " +
+        'saves 20-25 characters in the URL length.\n\nPress "Cancel" unless ' +
+        "you are very sure you know what you are doing."
+    );
   }
 }

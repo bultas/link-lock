@@ -3,8 +3,6 @@
  * May 2020
  */
 
-
-
 /*******************************************************************************
  * Helper Functions
  ******************************************************************************/
@@ -13,11 +11,10 @@
 function highlight(id) {
   let output = document.querySelector("#" + id);
   output.focus();
-  output.select()
+  output.select();
   output.setSelectionRange(0, output.value.length + 1);
   return output;
 }
-
 
 // Display a message in the "alert" area
 function error(text) {
@@ -25,8 +22,6 @@ function error(text) {
   alertText.innerText = text;
   alertText.style.opacity = 1;
 }
-
-
 
 /*******************************************************************************
  * Main UI Functions
@@ -45,7 +40,9 @@ async function onDecrypt() {
   try {
     url = new URL(urlText);
   } catch {
-    error("Entered text is not a valid URL. Make sure it includes \"https://\" too!");
+    error(
+      'Entered text is not a valid URL. Make sure it includes "https://" too!'
+    );
     return;
   }
 
@@ -59,7 +56,9 @@ async function onDecrypt() {
 
   // Check that all required parameters encoded in the URL are present
   if (!("v" in params && "e" in params)) {
-    error("The link appears corrupted. The encoded URL is missing necessary parameters.");
+    error(
+      "The link appears corrupted. The encoded URL is missing necessary parameters."
+    );
     return;
   }
 
@@ -95,7 +94,6 @@ async function onDecrypt() {
   document.querySelector("#open").href = decrypted;
 }
 
-
 // Activated when the "Copy" button is pressed
 function onCopy(id) {
   // Select and copy
@@ -106,7 +104,9 @@ function onCopy(id) {
   const alertArea = document.querySelector("#copy-alert");
   alertArea.innerText = `Copied ${output.value.length} characters`;
   alertArea.style.opacity = "1";
-  setTimeout(() => { alertArea.style.opacity = 0; }, 3000);
+  setTimeout(() => {
+    alertArea.style.opacity = 0;
+  }, 3000);
 
   // Deselect
   output.selectionEnd = output.selectionStart;
@@ -115,7 +115,8 @@ function onCopy(id) {
 
 function main() {
   if (window.location.hash) {
-    document.querySelector("#encrypted-url").value =
-      `https://jstrieb.github.io/link-lock/${window.location.hash}`;
+    document.querySelector(
+      "#encrypted-url"
+    ).value = `https://bultas.github.io/link-lock/${window.location.hash}`;
   }
 }

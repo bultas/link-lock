@@ -28,7 +28,9 @@ async function main() {
 
     // Check that all required parameters encoded in the URL are present
     if (!("v" in params && "e" in params)) {
-      error("The link appears corrupted. The encoded URL is missing necessary parameters.");
+      error(
+        "The link appears corrupted. The encoded URL is missing necessary parameters."
+      );
       return;
     }
 
@@ -48,7 +50,9 @@ async function main() {
     let hint, password;
     if ("h" in params) {
       hint = params["h"];
-      password = prompt(`Please enter the password to unlock the link.\n\nHint: ${hint}`);
+      password = prompt(
+        `Please enter the password to unlock the link.\n\nHint: ${hint}`
+      );
     } else {
       password = prompt("Please enter the password to unlock the link.");
     }
@@ -62,12 +66,14 @@ async function main() {
       error("Password is incorrect.");
 
       // Set the "decrypt without redirect" URL appropriately
-      document.querySelector("#no-redirect").href =
-        `https://jstrieb.github.io/link-lock/decrypt/#${hash}`;
+      document.querySelector(
+        "#no-redirect"
+      ).href = `https://bultas.github.io/link-lock/decrypt/#${hash}`;
 
       // Set the "create hidden bookmark" URL appropriately
-      document.querySelector("#hidden").href =
-        `https://jstrieb.github.io/link-lock/hidden/#${hash}`;
+      document.querySelector(
+        "#hidden"
+      ).href = `https://bultas.github.io/link-lock/hidden/#${hash}`;
       return;
     }
 
@@ -77,11 +83,17 @@ async function main() {
 
       // Prevent XSS by making sure only HTTP URLs are used. Also allow magnet
       // links for password-protected torrents.
-      if (!(urlObj.protocol == "http:"
-            || urlObj.protocol == "https:"
-            || urlObj.protocol == "magnet:")) {
-        error(`The link uses a non-hypertext protocol, which is not allowed. `
-            + `The URL begins with "${urlObj.protocol}" and may be malicious.`);
+      if (
+        !(
+          urlObj.protocol == "http:" ||
+          urlObj.protocol == "https:" ||
+          urlObj.protocol == "magnet:"
+        )
+      ) {
+        error(
+          `The link uses a non-hypertext protocol, which is not allowed. ` +
+            `The URL begins with "${urlObj.protocol}" and may be malicious.`
+        );
         return;
       }
 

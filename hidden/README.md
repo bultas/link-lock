@@ -2,7 +2,7 @@
 
 Click special bookmarks in the right order to open a hidden link.
 
-- [Try the demo](https://jstrieb.github.io/projects/hidden-bookmarks/#demo)
+- [Try the demo](https://bultas.github.io/projects/hidden-bookmarks/#demo)
 
 ---
 
@@ -20,7 +20,7 @@ could just as easily notice that. What do you do? Unfortunately, this is a
 [realistic scenario for many
 people](https://www.nytimes.com/wirecutter/blog/domestic-abusers-can-control-your-devices-heres-how-to-fight-back/).
 
-Almost a year ago, I created [Link Lock](https://jstrieb.github.io/link-lock)
+Almost a year ago, I created [Link Lock](https://bultas.github.io/link-lock)
 -- a tool to enable anyone to securely password-protect URLs. But adding a
 password to links isn't always enough.
 
@@ -34,11 +34,10 @@ users to hide bookmarks using features already built into every web browser.
 There are two versions available:
 
 - [A stable, simplified version integrated directly into Link
-  Lock](https://jstrieb.github.io/link-lock/hidden/)
+  Lock](https://bultas.github.io/link-lock/hidden/)
 - [An experimental
-  version](https://jstrieb.github.io/projects/hidden-bookmarks/#demo), designed
+  version](https://bultas.github.io/projects/hidden-bookmarks/#demo), designed
   to test the limits of the idea
-
 
 # How It Works
 
@@ -65,7 +64,7 @@ When one of the special knock sequence bookmarks is clicked, it runs JavaScript
 to check if the current URL fragment is base64-encoded JSON with the required
 information. If not, it redirects to the user-specified decoy bookmark link. If
 so, it adds some static characters to the current passphrase attempt string and
-tries to decrypt the hidden link using the newly-modified passphrase. 
+tries to decrypt the hidden link using the newly-modified passphrase.
 
 If decryption succeeds, it redirects to the now-decrypted, no-longer-hidden
 link. On the other hand, if this attempt fails, it redirects to the bookmark
@@ -85,15 +84,12 @@ two knocks. There is one universal second knock for any valid first knock. Then
 the hidden link prompts for a password. This two-knock version provides a
 practical level of privacy, without compromising on usability or security.
 
-
 <!--
 In port knocking, a user who attempts connections to closed ports is granted
 access if they connect to the correct ports in the correct order. For bookmark
 knocking, a user who clicks certain, otherwise-normal bookmarks in the right
 order is redirected to a hidden link.
 -->
-
-
 
 # Who It Is For
 
@@ -103,7 +99,7 @@ not agencies.
 
 In other words, links protected with bookmark knocking (as implemented here)
 will be difficult to notice for most people, let alone crack. But the
-protection *can* be noticed by an astute observer, and *can* be broken by a
+protection _can_ be noticed by an astute observer, and _can_ be broken by a
 determined adversary. (The keyspace is extremely small. Assume any attacker
 with all of the bookmarks in the knock sequence and the ability to brute force
 AES-GCM-encrypted data will successfully uncover your hidden link. On the other
@@ -112,7 +108,7 @@ password-protected.)
 
 Despite shortcomings, bookmark knocking is still a useful part of
 defense-in-depth. For more serious security, use the version built into [Link
-Lock](https://jstrieb.github.io/link-lock/).
+Lock](https://bultas.github.io/link-lock/).
 
 **Don't forget to use private browsing or incognito mode when accessing hidden
 links, otherwise the secret links are stored in your browser history, and the
@@ -125,17 +121,15 @@ Example use cases:
   live-stream, video call, or demonstration
 - Access a secret link without typing in a password (if there is concern about
   keyloggers or other [stalkerware](https://en.wikipedia.org/wiki/Stalkerware))
-- Create a fun riddle or prank for the owner of a computer you gain access to 
+- Create a fun riddle or prank for the owner of a computer you gain access to
 - Discreetly save personal bookmarks to a work computer
-
-
 
 # Known Issues
 
 If you have ideas for how to address the following problems, or want to discuss
 others, please [open an issue on
 GitHub](https://github.com/jstrieb/link-lock/issues/new) or use my [contact
-form](https://jstrieb.github.io/about#contact).
+form](https://bultas.github.io/about#contact).
 
 - Generated bookmarks are prefixed with `javascript:` and therefore cannot have
   favicons. As such, they're not perfectly identical to a regular bookmark for
@@ -146,10 +140,8 @@ form](https://jstrieb.github.io/about#contact).
 - Only tested with desktop Firefox and Chrome. Not tested with Safari, Edge, or
   on mobile devices.
 - Despite spending hours revising the instructions for the [Link Lock hidden
-  bookmarks](https://jstrieb.github.io/link-lock/hidden/) page, it is still far
+  bookmarks](https://bultas.github.io/link-lock/hidden/) page, it is still far
   from perfect. Making this idea easy to use and understand is very difficult.
-
-
 
 # For Abuse Victims
 
@@ -163,10 +155,10 @@ Article](https://www.nytimes.com/wirecutter/blog/domestic-abusers-can-control-yo
 on technology and domestic abuse:
 
 > If you are in immediate danger, call 911.
-> 
+>
 > If your calls are being tracked, call your local services hotline, like 211
 > or 311, and ask to be transferred to a local resource center.
-> 
+>
 > If you or someone you know is in an abusive relationship or has been sexually
 > assaulted, call the [National Sexual Assault
 > Hotline](https://www.rainn.org/get-help/national-sexual-assault-hotline) at
