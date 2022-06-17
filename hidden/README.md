@@ -128,7 +128,7 @@ Example use cases:
 
 If you have ideas for how to address the following problems, or want to discuss
 others, please [open an issue on
-GitHub](https://github.com/jstrieb/link-lock/issues/new) or use my [contact
+GitHub](https://github.com/bultas/link-lock/issues/new) or use my [contact
 form](https://bultas.github.io/about#contact).
 
 - Generated bookmarks are prefixed with `javascript:` and therefore cannot have

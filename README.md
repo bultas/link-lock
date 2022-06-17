@@ -23,7 +23,7 @@ Link Lock has many uses:
 
 - Store private bookmarks on a shared computer
 - Encrypt entire web pages (via [URL
-  Pages](https://github.com/jstrieb/urlpages))
+  Pages](https://github.com/bultas/urlpages))
 - Send sensitive links over public or insecure channels (e.g., posting links
   to a public website that require a password to access)
 - Implement simple CAPTCHAs – particularly effective against basic web scrapers
@@ -42,7 +42,7 @@ disabled by the user via "advanced options." The salt and initialization vector
 are sent with the encrypted data if they are randomly generated. The API is
 versioned such that old encrypted links will always work, even if later
 versions of Link Lock are updated to be more secure. Please read the code
-([`api.js`](https://github.com/jstrieb/link-lock/blob/master/api.js) in
+([`api.js`](https://github.com/bultas/link-lock/blob/master/api.js) in
 particular) for more information.
 
 Read the Hacker News discussion [here](https://news.ycombinator.com/item?id=23242290).
@@ -106,7 +106,7 @@ me to build a secure encryption application. In particular:
   Link Lock URLs in the browser can be found here:
   <https://bultas.github.io/link-lock/bruteforce>.
 - A parallelized, cross-platform, CPU-based brute forcer can be found here:
-  <https://github.com/jstrieb/bruteforce-link-lock>
+  <https://github.com/bultas/bruteforce-link-lock>
 - If you receive a Link Lock URL that you do not trust, decrypt it using this
   interface that does not automatically redirect:
   <https://bultas.github.io/link-lock/decrypt>.
@@ -141,7 +141,7 @@ the domain name of the pasted link, only the "fragment" (the part after the
 `#`). So, for example, the Wikipedia link above can be pasted directly in there
 and decrypted without changing the domain.
 
-Using a local copy of [URL Pages](https://github.com/jstrieb/urlpages) is also
+Using a local copy of [URL Pages](https://github.com/bultas/urlpages) is also
 recommended. Entire web pages can be shared safely and secretly this way.
 
 ## Project Status
